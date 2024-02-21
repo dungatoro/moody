@@ -4,21 +4,12 @@ require 'sinatra'
 require 'sequel'
 require 'bcrypt'
 
-# local SQLite database within project directory
-DB = Sequel.sqlite('db/local.db')
+# Load all Sequel models
+$LOAD_PATH.push('db/models')
+Dir.glob('db/models/*.rb').sort.each { |file| require_relative file }
 
-# base user model inherits from Sequel::Model
-# - serialize to database
-# - creates `initialize` method automatically using table fields
-class User < Sequel::Model
-  def password=(password)
-    self.password_hash = BCrypt::Password.create(password)
-  end
-
-  def authenticate(password)
-    BCrypt::Password.new(password_hash) == password
-  end
-end
+# Connect to local SQLite database
+DB = Sequel.sqlite 'db/local.db'
 
 # enable sessions to keep user logged in during their visit
 # this creates a `session` table storing currently active users
@@ -33,12 +24,21 @@ get '/signup' do
 end
 
 post '/signup' do
-  user = User.new(email: params[:email], username: params[:username], password: params[:password])
-  if user.save
-    session[:user_id] = user.id
-    redirect '/'
-  else
+  # Make sure email is unique
+  if DB[:users].where(email: params[:email]).first
     erb :signup_err
+  else
+    user = User.new(
+      email: params[:email],
+      username: params[:username],
+      password: params[:password]
+    )
+    if user.save
+      session[:user_id] = user.id
+      redirect '/'
+    else
+      erb :signup_err
+    end
   end
 end
 
@@ -60,5 +60,3 @@ get '/logout' do
   session.clear
   redirect '/login'
 end
-
-

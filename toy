@@ -3,4 +3,17 @@
 case $1 in
     init) sqlite3 db/local.db "VACUUM;" ;; # new empty database
     migrate) sqlite3 db/local.db < db/migrations.sql ;; # run migrations
+    model) 
+        touch "db/models/$2.rb"
+        class="${2^}"
+        cat > "db/models/$2.rb" << EOF
+# frozen_string_literal: true
+
+DB = Sequel.sqlite 'db/local.db'
+
+class $class < Sequel::Model
+end
+EOF
+    ;;
+
 esac
