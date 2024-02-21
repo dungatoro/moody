@@ -1,0 +1,56 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    base64 (0.2.0)
+    bcrypt (3.1.20)
+    bigdecimal (3.1.6)
+    cgi (0.4.1)
+    erb (4.0.4)
+      cgi (>= 0.3.3)
+    mustermann (3.0.0)
+      ruby2_keywords (~> 0.0.1)
+    rack (3.0.9.1)
+    rack-protection (4.0.0)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.0.0)
+      rack (>= 3.0.0)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
+    ruby2_keywords (0.0.5)
+    sequel (5.77.0)
+      bigdecimal
+    sinatra (4.0.0)
+      mustermann (~> 3.0)
+      rack (>= 3.0.0, < 4)
+      rack-protection (= 4.0.0)
+      rack-session (>= 2.0.0, < 3)
+      tilt (~> 2.0)
+    sqlite3 (1.7.2-aarch64-linux)
+    sqlite3 (1.7.2-arm-linux)
+    sqlite3 (1.7.2-arm64-darwin)
+    sqlite3 (1.7.2-x86-linux)
+    sqlite3 (1.7.2-x86_64-darwin)
+    sqlite3 (1.7.2-x86_64-linux)
+    tilt (2.3.0)
+    webrick (1.8.1)
+
+PLATFORMS
+  aarch64-linux
+  arm-linux
+  arm64-darwin
+  x86-linux
+  x86_64-darwin
+  x86_64-linux
+
+DEPENDENCIES
+  bcrypt
+  erb
+  rackup (~> 2.1)
+  sequel
+  sinatra
+  sqlite3
+
+BUNDLED WITH
+   2.5.3
