@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" 
+          name="viewport" 
+          content="width=device-width, initial-scale=1.0"/>
+    <script src="https://unpkg.com/htmx.org@1.8.0"></script>
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="/main.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div> 
+        <h1>Sign Up</h1>
+        <form method="post" action="/signup">
+            <input type="email" name="email" placeholder="user@email.com">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <input type="password" name="password_confirm" placeholder="confirm password">
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
