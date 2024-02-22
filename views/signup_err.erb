@@ -4,19 +4,23 @@
           name="viewport" 
           content="width=device-width, initial-scale=1.0"/>
     <script src="https://unpkg.com/htmx.org@1.8.0"></script>
-    <link rel="stylesheet" 
-          href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/pico.css"/>
+    <link rel="stylesheet" href="/main.css"/>
     <title>Sign Up</title>
 </head>
 <body>
     <div> 
         <h1>Sign Up</h1>
+        <div>Signup failed</div>
         <form method="post" action="/signup">
-            <input type="email" name="email" placeholder="user@email.com" aria-invalid="true"/>
-            <input type="text" name="username" placeholder="username" aria-invalid="true"/>
-            <input type="password" name="password" placeholder="password" aria-invalid="true"/>
-            <input type="password" name="password_confirm" placeholder="confirm password"/>
+            <input type="email" name="email" 
+                placeholder="user@email.com" aria-invalid="true"/>
+            <input type="text" name="username" 
+                placeholder="username" aria-invalid="true"/>
+            <input type="password" name="password" 
+                placeholder="password" aria-invalid="true"/>
+            <input type="password" name="confirm_password" 
+                placeholder="confirm password" aria-invalid="true"/>
             <button type="submit">Sign Up</button>
         </form>
     </div>
