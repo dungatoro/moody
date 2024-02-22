@@ -12,10 +12,10 @@ create table if not exists users (
 
 -- Create the moods table
 create table if not exists moods (
-    id        integer primary key,
-    user_id   integer not null, 
-    mood      text not null,
-    note      text not null,
-    timestamp integer not null,
+    id      integer primary key,
+    user_id integer not null, 
+    mood    text not null,
+    note    text not null,
+    time    integer not null,
     foreign key(user_id) references users(id)
 );

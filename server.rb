@@ -34,7 +34,7 @@ post '/signup' do
       password: params[:password]
     )
     if user.save
-      session[:user_id] = user.id
+      session[:user] = user.id
       redirect '/'
     else
       erb :signup_err
@@ -49,7 +49,7 @@ end
 post '/login' do
   user = User.find(email: params[:email])
   if user&.authenticate(params[:password])
-    session[:user_id] = user.id
+    session[:user] = user.id
     redirect '/new_mood'
   else
     erb :login_err
@@ -62,13 +62,8 @@ get '/logout' do
 end
 
 get '/history' do
-  moods = DB[:moods].where(user_id: session[:user_id]).order(Sequel.desc(:timestamp))
-  html = '<ul>'
-  moods.each do |mood|
-    html += "<li>#{mood[:mood]}\t#{Time.at(mood[:timestamp]).strftime('%m-%d %H:%M:%S')}</li>"
-  end
-  html += '</ul>'
-  erb html
+  @moods = DB[:moods].where(user_id: session[:user]).order(Sequel.desc(:time))
+  erb :history
 end
 
 get '/new_mood' do
@@ -79,10 +74,10 @@ post '/new_mood' do
   puts params[:mood].class
   puts params[:note].class
   mood = Mood.new(
-    user_id: session[:user_id],
+    user_id: session[:user],
     mood: params[:mood],
     note: params[:note],
-    timestamp: Time.now.to_i
+    time: Time.now.to_i
   )
   if mood.save
     redirect '/history'
